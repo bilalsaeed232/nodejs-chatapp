@@ -16,6 +16,8 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -37,6 +39,9 @@
 
 
     <script>
+        // to connect this client with server socket.io
+        // Note: it notifies server about it
+        var socket = io();
         $(() => {
             $('#send').click(() => {
                 addMessage({
