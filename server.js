@@ -1,11 +1,16 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 
 
 var port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 
 //messages object array
 let messages = [{
@@ -26,7 +31,7 @@ app.get('/messages', (req, res) => {
 
 // to receive messages from clients
 app.post('/messages', (req, res) => {
-    console.dir(req.body);
+    messages.push(req.body);
     res.sendStatus(200);
 });
 
