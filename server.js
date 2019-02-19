@@ -3,6 +3,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
+const http = require('http').Server(app);
+
 
 var port = process.env.PORT || 3000;
 
@@ -36,6 +38,6 @@ app.post('/messages', (req, res) => {
 });
 
 
-app.listen(port, () => {
+http.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
