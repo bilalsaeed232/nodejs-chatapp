@@ -24,7 +24,9 @@
         <div class="jumbotron">
             <h1 class="display-4">Send Message</h1>
             <br />
-            <input type="text" placeholder="Type Your message..." class="form-control">
+            <input type="text" placeholder="Your name..." id="name" class="form-control">
+            <br />
+            <textarea type="text" placeholder="Your message..." id="message" class="form-control"></textarea>
             <br />
             <button id="send" class="btn btn-success">Send</button>
         </div>
@@ -38,15 +40,20 @@
         $(() => {
             $('#send').click(() => {
                 addMessage({
-                    name: "Bilal",
-                    message: "Hello, World!"
-                })
+                    name: $("#name").val(),
+                    message: $("#message").val()
+                });
+
             });
 
             getMessages();
         });
 
         function addMessage(message) {
+            //send to server
+            postMessage(message);
+
+            //update page
             $('#messages').append(
                 `
                 <h4>${message.name}</h4>
@@ -63,6 +70,12 @@
             $.get(settings).done((data) => {
                 data.forEach(addMessage);
             });
+        }
+
+
+        function postMessage(message) {
+            //another shortcut for using jquery post unlike get
+            $.post('http://localhost:3000/messages', message);
         }
     </script>
 </body>
