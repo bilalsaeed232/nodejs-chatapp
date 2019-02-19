@@ -24,6 +24,13 @@ app.get('/messages', (req, res) => {
 })
 
 
+// to receive messages from clients
+app.post('/messages', (req, res) => {
+    console.dir(req.body);
+    res.sendStatus(200);
+});
+
+
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
