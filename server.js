@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const http = require('http').Server(app);
-
+const io = require('socket.io')(http);
 
 var port = process.env.PORT || 3000;
 
@@ -36,6 +36,11 @@ app.post('/messages', (req, res) => {
     messages.push(req.body);
     res.sendStatus(200);
 });
+
+
+io.on('connection', () => {
+    console.log("A new user is connected!!!");
+})
 
 
 http.listen(port, () => {
