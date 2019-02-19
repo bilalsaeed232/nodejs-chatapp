@@ -33,7 +33,10 @@ app.get('/messages', (req, res) => {
 
 // to receive messages from clients
 app.post('/messages', (req, res) => {
+    if (req.body.name === undefined) return;
     messages.push(req.body);
+    console.log(`Message from ${req.body.name}`);
+    io.emit('message', req.body);
     res.sendStatus(200);
 });
 

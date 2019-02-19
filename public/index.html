@@ -44,20 +44,24 @@
         var socket = io();
         $(() => {
             $('#send').click(() => {
-                addMessage({
+                let message = {
                     name: $("#name").val(),
                     message: $("#message").val()
-                });
+                };
 
+                postMessage(message);
             });
 
             getMessages();
         });
 
-        function addMessage(message) {
-            //send to server
-            postMessage(message);
 
+        socket.on('message', (message) => {
+            console.info(`Message recieved from ${message.name}`);
+            addMessage(message);
+        });
+
+        function addMessage(message) {
             //update page
             $('#messages').append(
                 `
