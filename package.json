@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-chatapp",
+  "version": "1.0.0",
+  "description": "using expressjs, socket.io, mongodb and jasmine (for testing)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilalsaeed232/nodejs-chatapp.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "socketio",
+    "chatapp"
+  ],
+  "author": "Bilal Saeed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bilalsaeed232/nodejs-chatapp/issues"
+  },
+  "homepage": "https://github.com/bilalsaeed232/nodejs-chatapp#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
