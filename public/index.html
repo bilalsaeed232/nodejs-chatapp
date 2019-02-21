@@ -72,7 +72,7 @@
 
         function getMessages() {
             var settings = {
-                "url": 'http://localhost:3000/messages',
+                "url": 'http://localhost:3000/api/messages',
                 "method": "GET"
             };
 
@@ -84,7 +84,7 @@
 
         function postMessage(message) {
             //another shortcut for using jquery post unlike get
-            $.post('http://localhost:3000/messages', message);
+            $.post('http://localhost:3000/api/messages', message);
         }
     </script>
 </body>

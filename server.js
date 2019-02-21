@@ -1,10 +1,13 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const app = express();
 
+const api = require('./routes/api');
+
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
 
 var port = process.env.PORT || 3000;
 
@@ -14,31 +17,14 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-//messages object array
-let messages = [{
-        name: 'Tom',
-        message: 'Hi, bilal how are you?'
-    },
-    {
-        name: 'John',
-        message: 'Hi, buddy what\'s going on'
-    }
-];
 
-// define a route to serve those messages to client
-app.get('/messages', (req, res) => {
-    res.send(messages);
+
+
+app.use('/api', (req, res, next) => {
+    req.socket = io;
+    next();
 })
-
-
-// to receive messages from clients
-app.post('/messages', (req, res) => {
-    if (req.body.name === undefined) return;
-    messages.push(req.body);
-    console.log(`Message from ${req.body.name}`);
-    io.emit('message', req.body);
-    res.sendStatus(200);
-});
+app.use('/api', api);
 
 
 io.on('connection', () => {
