@@ -43,17 +43,18 @@
         // Note: it notifies server about it
         var socket = io();
         $(() => {
-            $('#send').click(() => {
-                let message = {
-                    name: $("#name").val(),
-                    message: $("#message").val()
-                };
-
-                postMessage(message);
-            });
-
+            $('#send').click(onSend);
             getMessages();
         });
+
+        function onSend() {
+            let message = {
+                name: $("#name").val(),
+                message: $("#message").val()
+            };
+
+            postMessage(message);
+        }
 
 
         socket.on('message', (message) => {
@@ -63,7 +64,7 @@
 
         function addMessage(message) {
             //update page
-            $('#messages').append(
+            $('#messages').prepend(
                 `
                 <h4>${message.name}</h4>
                 <p>${message.message}</p>

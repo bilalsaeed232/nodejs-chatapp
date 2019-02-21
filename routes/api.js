@@ -30,12 +30,26 @@ api.get('/messages', (req, res) => {
 // to receive messages from clients
 api.post('/messages', async (req, res) => {
     if (req.body.name === undefined) return;
-    console.log(`Message from ${req.body.name}`);
 
-    let message = await Message.create(req.body);
+    let message = new Message(req.body);
 
-    console.log("MESSAGE created!", message);
-    req.socket.emit('message', message);
+
+    let saved = await message.save();
+    console.log('Saved:', saved);
+
+    let censored = await Message.findOne({
+        message: 'badword'
+    });
+
+    if (censored) {
+        // if censored message found, remove it
+        Message.remove({
+            _id: censored.id
+        });
+    } else {
+        req.socket.emit('message', message);
+    }
+
     res.sendStatus(200);
 });
 
